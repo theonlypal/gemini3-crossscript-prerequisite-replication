@@ -127,7 +127,10 @@ and linked SHA-256 event hashes.
 
 The runner defaults to offline mode. Live execution requires explicit
 phase-specific authorization tied to the clean tagged commit and protocol hash,
-plus confirmation of the selected project's zero-cost eligibility. Pilot and
+plus confirmation of the selected project's zero-cost eligibility. The
+[October 12 billing amendment](billing_amendment.json) additionally permits an
+explicitly authorized paid pilot with a $1 token-charge budget and a pre-request
+budget reserve. It changes no experimental request or analysis. Pilot and
 confirmatory execution require separate authorization. Credentials are external
 to this repository. Each run uses a new directory; no automatic retries or resume.
 

@@ -11,17 +11,21 @@ def git(*args):
     return subprocess.check_output(['git','-C',str(ROOT),*args],text=True).strip()
 
 def authorize(phase, authorization, live, zero_cost):
-    if not live or not zero_cost or authorization is None:
-        raise PermissionError('OFFLINE: separate live authorization and verified zero-cost project required')
+    if not live or authorization is None:
+        raise PermissionError('OFFLINE: separate live authorization required')
     integrity()
     a=read(authorization)
     head=git('rev-parse','HEAD')
     tag=read(ROOT/'freeze_manifest.json')['tag']
     if git('status','--porcelain') or git('rev-parse',tag+'^{commit}')!=head:
         raise PermissionError('Frozen clean tagged commit required')
-    required={'phase':phase,'commit':head,'protocol_sha256':sha((ROOT/'protocol.json').read_bytes()),'authorize_live':True,'zero_cost_project_verified':True,'public_freeze_verified':True}
+    required={'phase':phase,'commit':head,'protocol_sha256':sha((ROOT/'protocol.json').read_bytes()),'authorize_live':True,'public_freeze_verified':True}
     if any(a.get(k)!=v for k,v in required.items()):
         raise PermissionError('Authorization does not match phase/freeze/no-spend gates')
+    if not (zero_cost and a.get('zero_cost_project_verified') is True):
+        amendment=read(ROOT/'billing_amendment.json')
+        if phase!='pilot' or a.get('authorize_paid') is not True or a.get('budget_usd')!=amendment['pilot_budget_usd'] or a.get('billing_amendment_sha256')!=sha((ROOT/'billing_amendment.json').read_bytes()):
+            raise PermissionError('Paid pilot requires exact amended budget authorization')
     if not isinstance(a.get('public_commit_url'),str) or not a['public_commit_url'].startswith('https://github.com/') or not a['public_commit_url'].endswith('/commit/'+head):
         raise PermissionError('Public frozen commit reference required')
     if not a.get('project_reference') or not a.get('operator'):
@@ -70,11 +74,18 @@ def execute(phase, authorization, live=False, zero_cost=False, key_file=None, ou
     save(dest/'run.json',{'phase':phase,'commit':git('rev-parse','HEAD'),'authorization':auth,'schedule_sha256':sha((ROOT/'schedules'/(phase+'.json')).read_bytes()),'protocol_sha256':sha((ROOT/'protocol.json').read_bytes()),'started_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()})
     previous='0'*64
     returned=None
+    spent_usd=0.0
     for row in schedule:
         integrity()
         folder=dest/row['slot_id']
         folder.mkdir()
         body=request_bytes(row['cell'])
+        if auth.get('authorize_paid'):
+            # Conservative input allowance; all generated thinking is charged.
+            reserve=(len(body)+1024)*0.50/1e6+protocol['generationConfig']['maxOutputTokens']*3.00/1e6
+            if spent_usd+reserve>auth['budget_usd']:
+                save(dest/'STOPPED.json',{'reason':'BUDGET_RESERVE','slot_id':row['slot_id'],'last_event_sha256':previous,'decision':'INCONCLUSIVE','estimated_cost_usd':spent_usd})
+                return
         if sha(body)!=row['request_sha256']:
             raise ValueError('Request hash drift')
         (folder/'request.bin').write_bytes(body)
@@ -86,6 +97,15 @@ def execute(phase, authorization, live=False, zero_cost=False, key_file=None, ou
         event={**row,'http_status':status,'response_headers':headers,'transport_error':error,'started_utc':started,'finished_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'response_sha256':sha(raw),'classification_sha256':sha((folder/'classification.json').read_bytes()),'previous_event_sha256':previous,'requested_model':protocol['model'],'endpoint':protocol['endpoint']}
         save(folder/'event.json',event)
         previous=sha((folder/'event.json').read_bytes())
+        if auth.get('authorize_paid') and status==200 and not error:
+            usage=json.loads(raw).get('usageMetadata',{})
+            counts=[usage.get('promptTokenCount'),usage.get('candidatesTokenCount',0),usage.get('thoughtsTokenCount',0)]
+            if not all(isinstance(n,int) and n>=0 for n in counts):
+                save(dest/'STOPPED.json',{'reason':'MISSING_BILLING_USAGE','slot_id':row['slot_id'],'last_event_sha256':previous,'decision':'INCONCLUSIVE'})
+                return
+            spent_usd+=(counts[0]*0.50+(counts[1]+counts[2])*3.00)/1e6
+            save(dest/'cost.json',{'estimated_cost_usd':spent_usd,'budget_usd':auth['budget_usd'],'tax_excluded':True})
+        print(row['slot_id'],row['cell'],status,classification['class'],flush=True)
         mv=classification['modelVersion']
         reason=None
         if status==404:
