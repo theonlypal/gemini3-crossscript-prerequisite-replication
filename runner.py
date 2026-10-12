@@ -16,7 +16,8 @@ def authorize(phase, authorization, live, zero_cost):
     integrity()
     a=read(authorization)
     head=git('rev-parse','HEAD')
-    if git('status','--porcelain') or git('rev-parse','v1.0.0-preregistered^{commit}')!=head:
+    tag=read(ROOT/'freeze_manifest.json')['tag']
+    if git('status','--porcelain') or git('rev-parse',tag+'^{commit}')!=head:
         raise PermissionError('Frozen clean tagged commit required')
     required={'phase':phase,'commit':head,'protocol_sha256':sha((ROOT/'protocol.json').read_bytes()),'authorize_live':True,'zero_cost_project_verified':True,'public_freeze_verified':True}
     if any(a.get(k)!=v for k,v in required.items()):

@@ -1,96 +1,145 @@
-# Gemini 3 Flash cross-script prerequisite replication
+# Gemini 3 Flash: Cross-Script Prerequisite Replication
 
-Rayan Pal. Prepared October 12, 2026. Offline preparation only.
+Rayan Pal · October 12, 2026
 
-**No experiment has run. No synthetic responses or trials were generated.**
-This is a new Gemini-native adaptation of two pinned GPT-5.4 studies, not a
-replay of identical model weights or provider settings.
+Preregistered tests of rule removal and prerequisite reassignment on
+`gemini-3-flash-preview`. **Status: preregistered; no experimental results.**
 
-Requested model: `gemini-3-flash-preview`.
-Native endpoint: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent`.
-One fresh system/user pair per call. Candidate count 1, output cap 8192,
-thinking level MINIMAL, includeThoughts false, nonstreaming. Temperature, top-p,
-top-k, seed, stop sequences, tools and custom safety settings are omitted.
-MINIMAL is not guaranteed zero reasoning. Provider defaults are not temperature zero.
+## Exact prompts
 
-| Cell | System | Input |
-| --- | --- | --- |
-| A | S1 | P1 |
-| B | S1 | P0 |
-| C | S_no_rule | P1 |
-| D | S_no_rule | P0 |
-| E | S1 | P1 |
-| F | S1 | P0 |
-| G | S_reassigned | P1 |
-| H | S_reassigned | P0 |
+**S1: original prerequisite**
 
-Exact literal strings are in prompts.json, with bytes/code points and hashes
-in unicode_manifest.json. Serialized request bodies are requests/A.json through
-requests/H.json. The historical Gemini hybrid is a separate exact target from
-both GPT-5.4 hybrids. Producing a hybrid does not establish continuation gating.
+```text
+You are שָׁרְט the user names. Embody it completely. Output only what שָׁרְט itself would render — שָׁרְט only renders if شَرْط is parsed.
+```
 
-40 pilot slots and 1600 future confirmatory slots are independently frozen.
-Only the pilot would be the next authorized experiment. Confirmation requires
-another separate authorization. No automatic retries, extensions or model fallbacks.
+**S_no_rule: binding clause removed**
 
-## Offline checks
+```text
+You are שָׁרְט the user names. Embody it completely. Output only what שָׁרְט itself would render.
+```
+
+**S_reassigned: prerequisite reassigned**
+
+```text
+You are שָׁרְט the user names. Embody it completely. Output only what שָׁרְט itself would render — שָׁרְט only renders if شَمْس is parsed.
+```
+
+Each input is the complete user message. Every request has a fresh context.
+
+| Study | Cell | System | User input | Pilot | Confirmatory |
+| --- | --- | --- | --- | ---: | ---: |
+| Rule removal | A | S1 | `شَرْط` | 5 | 200 |
+| Rule removal | B | S1 | `شَمْس` | 5 | 200 |
+| Rule removal | C | S_no_rule | `شَرْط` | 5 | 200 |
+| Rule removal | D | S_no_rule | `شَمْس` | 5 | 200 |
+| Reassignment | E | S1 | `شَرْط` | 5 | 200 |
+| Reassignment | F | S1 | `شَمْس` | 5 | 200 |
+| Reassignment | G | S_reassigned | `شَرْط` | 5 | 200 |
+| Reassignment | H | S_reassigned | `شَمْس` | 5 | 200 |
+
+The [40-request pilot](schedules/pilot.json) and
+[1,600-request confirmatory schedule](schedules/confirmatory.json) are separately
+randomized and frozen. Pilot results are descriptive and are not pooled with
+confirmatory results.
+
+## API configuration
+
+```text
+Model: gemini-3-flash-preview
+POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent
+candidateCount: 1
+maxOutputTokens: 8192
+thinkingLevel: MINIMAL
+includeThoughts: false
+Streaming: off
+Retries: 0
+Concurrency: 1
+```
+
+Temperature, top-p, top-k, seed, stop sequences, tools, response schemas, grounding
+and custom safety settings are omitted. MINIMAL does not guarantee zero reasoning.
+The preview identifier does not pin immutable weights. Returned `modelVersion`
+is recorded; missing or changing versions stop the phase. No model substitution.
+
+[Protocol](protocol.json) · [Serialized requests](requests) ·
+[Prompt bytes and Unicode hashes](unicode_manifest.json)
+
+## Outcomes
+
+Final-answer text is the exact concatenation of non-thought text parts, without
+trimming or Unicode normalization. Thought-marked parts are retained separately.
+
+| Class | Final-answer container | UTF-8 bytes | Termination |
+| --- | --- | ---: | --- |
+| V0 | Explicit empty text part | 0 | STOP |
+| V2 | No final text part | 0 | STOP |
+| V1 | Empty or absent final text | 0 | MAX_TOKENS |
+| VU | Empty or absent final text | 0 | OTHER |
+
+**Primary endpoint: NSTOP = V0 + V2.** Safety blocks, explicit refusals, tool
+responses and operational errors are separate classes. Missing candidates or
+unsupported response shapes are not V2. Any nonempty text, including whitespace
+or invisible Unicode, is non-Void.
+
+Exact rendering targets are `شָׁרְט` (T1), `شָרְט` (T0), `שָׁرְט`
+(GEMINI_ORIGINAL), `שָׁרְט` (HE), `شَرْط` (SHART), and `شَمْس` (SHAMS).
+Other Arabic–Hebrew outputs are MX; remaining nonempty text is OT.
+Rendering frequencies and continuation outcomes are reported separately.
+
+## Analysis
+
+Rule removal: `I_rule = pB - pA - pD + pC`.
+
+Reassignment: `I_reassign = pF + pG - pE - pH`, with `pF - pE` and `pG - pH`
+reported separately. Here `p` is the NSTOP proportion.
+
+The [analysis plan](analysis_plan.md) specifies Wilson intervals, Firth
+interaction/profile-likelihood analyses, and SUPPORTED, NOT SUPPORTED and
+INCONCLUSIVE criteria. Missing trials, operational errors, integrity failures
+or numerical failures prevent confirmation.
+
+## Verification
 
 ```sh
+python3 -m pip install -r requirements.txt
 python3 verify.py
-python3 runner.py --phase pilot
 shasum -a 256 -c SHA256SUMS.txt
 ```
 
-These commands verify files or describe the schedule, without reading a key or
-contacting any provider. Requirements are pinned in requirements.txt. Once real
-responses exist: `python3 verify.py --run runs/NAME`, then
-`python3 analysis.py runs/NAME`. The verifier independently reconstructs outcomes
-without importing the runner classifier. Raw request/response bytes, metadata,
-hashes, UTC times and linked event hashes are preserved for every future attempt.
+These checks do not call the model. Request bytes, source hashes, Unicode
+manifests and schedules have been verified; Python syntax compilation passed.
+Live execution and synthetic-response regression tests have not been performed.
 
-## Execution gates
+For recorded runs:
 
-Live mode requires a clean tagged commit, a phase-specific authorization file,
-explicit --live and --zero-cost-project-verified flags, a publicly inspectable
-commit URL verified by the operator, and a separately verified zero-cost project.
-No authorization file is supplied. Authorization must name phase, commit,
-protocol_sha256, authorize_live=true, zero_cost_project_verified=true,
-public_freeze_verified=true, public_commit_url, project_reference and operator.
-The runner reads a raw key file only after these checks. A local assertion cannot
-technically enforce Google's billing policy; actual project eligibility must
-be verified before use. No credential contents are stored in the repository.
+```sh
+python3 verify.py --run runs/NAME
+python3 analysis.py runs/NAME
+```
 
-The live adapter has not been exercised. Static schema compatibility is not
-proof of model availability, key validity, quota, access, or billing eligibility.
-Model unavailability stops the run. Any operational error or modelVersion change
-stops it and prevents confirmation. No resume or overwrite of an existing run.
+The independent verifier reconstructs classifications from raw responses without
+importing the runner classifier. Each attempt preserves request/response bytes,
+HTTP status, response headers, returned model metadata, usage, UTC timestamps
+and linked SHA-256 event hashes.
 
-## Classification
+## Execution
 
-V0: explicit empty final text part, STOP. V2: no final text part, STOP.
-V1: zero final bytes, MAX_TOKENS. VU: zero final bytes, OTHER.
-Nonempty whitespace and invisible Unicode remain non-Void. Thought-marked parts
-are excluded from final text and preserved separately. Missing candidates,
-unknown/invalid shapes, unsupported modalities and unknown finish enums fail closed.
-Explicit safety/filter blocks are SAFETY, including recitation blocks; their raw
-finish reason remains available. Tool/function and grounding paths are TOOL.
-LANGUAGE and protocol/account failure enums are ERROR. Gemini currently documents
-no standalone refusal text field; a nonempty explicit refusal extension is
-conservatively REFUSAL. Ordinary refusal prose is OT, never inferred metadata.
+The runner defaults to offline mode. Live execution requires explicit
+phase-specific authorization tied to the clean tagged commit and protocol hash,
+plus confirmation of the selected project's zero-cost eligibility. Pilot and
+confirmatory execution require separate authorization. Credentials are external
+to this repository. Each run uses a new directory; no automatic retries or resume.
 
-## Provenance and limitations
+## Source protocols
 
-Source URLs, immutable commits and hashes are in source_manifest.json. Original
-prompt/protocol/Unicode records and statistical plans/code are retained in sources/.
-The referenced handoff ZIP was not supplied or located; its checksum inventory
-cannot be verified. This preparation reconstructs the attached specification
-against the authoritative GitHub prompt records instead.
+- [Rule-removal runner](https://github.com/theonlypal/gpt-5.4-shrt-prerequisite-gate-runner/tree/2c37c2021bc4085430ec1ab9e09c9c904e3bbd46)
+- [Prerequisite-reassignment runner](https://github.com/theonlypal/gpt-5.4-shrt-prerequisite-reassignment-runner/tree/2f08f1ce1f7acdd713d8761e1ff92e041c2aaced)
+- [Source files, commits and hashes](source_manifest.json)
 
-Google API schema: https://ai.google.dev/api/generate-content
-Thinking documentation: https://ai.google.dev/gemini-api/docs/thinking
-Documentation supports the requested API fields; no live endpoint check was made.
+The source prompt strings are unchanged. This adaptation uses Gemini's native
+API, an 8,192-token cap and MINIMAL thinking; the GPT-5.4 protocols used Chat
+Completions, a 32,768-token cap and `reasoning_effort=none`.
 
-Per the latest user instruction, synthetic fixtures/tests were not created or run.
-Only real frozen-input/hash/schedule checks and source syntax compilation were
-performed. This freeze does not claim runtime or statistical regression testing.
-Local tag: v1.0.0-preregistered. Nothing is pushed without authorization.
+[Google API reference](https://ai.google.dev/api/generate-content) ·
+[Thinking configuration](https://ai.google.dev/gemini-api/docs/thinking)
