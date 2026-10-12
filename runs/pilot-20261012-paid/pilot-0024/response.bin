@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "...בשירות שָׁרְט...\n\n**Parsing status:** شَرْط (Condition) NOT FOUND. \n**Input:** شَمْس (Sun).\n\n**Result:** שָׁרְט yields nothing. No render.",
+            "thoughtSignature": "EmUKYwFpFH0T4UVRzt2h48Hlj5TjR8YaDAqdHXCHaJpt5rUXJ281pTy2RYz4I06iqEfA+pWiTAhInKKZOIvfJqMV6HDmLEMjCApcnmCoVy1Flhv9pzLXVYFMISzSwPC4jzqYhDtZZw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 51,
+    "totalTokenCount": 100,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "3yjNasW1E_-o_uMPl6-88Q4"
+}

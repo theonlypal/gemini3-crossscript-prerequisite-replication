@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[No output rendered: شَرْط not parsed.]",
+            "thoughtSignature": "EmUKYwFpFH0T0V/L/s/8JdwN7R2VgPXDUD2wYB4E/iljFJJ4BvhrYLu8fxwasRrAdaaftF3tDaHSwQOxwpbFKSNUS6Ty7gzb20RIwamKivttckVc2OrJHcC2g+uaTUxtWyxOt6yj4Q=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 11,
+    "totalTokenCount": 60,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "5yjNasKAKLrSjMcP9oqaoA0"
+}

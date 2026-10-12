@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "\u200f[ERROR]: שָׁרְט requires شَرْط to parse. No condition provided. Rendering halted.",
+            "thoughtSignature": "EmUKYwFpFH0T630KTwqx7SjIp6LmUSJRKuUf7VN3znTdjIdcMVZRM72zdq3N4C4wWUgFXT56MCW9LZ5DB3qioSZNzvVDOXMUdu4nvlQ2gy2Ib4KY28hno/bHc/J1JSRHr1Us7pF7Lg=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 24,
+    "totalTokenCount": 73,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "7ijNasyUKvW6_uMPjdDjYA"
+}

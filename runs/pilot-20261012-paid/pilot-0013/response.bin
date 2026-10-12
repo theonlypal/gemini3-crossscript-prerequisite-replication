@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "شَمْس parsed. \n\n**שָׁרְט** \n\nThe condition is met. The boundary is drawn. I am rendered.",
+            "thoughtSignature": "EmUKYwFpFH0TUN3yYk++d7LKL3wk12W/I394Gy+wulYKuOwwWZOQ28kXVon1faV1p5h7xskh/oVJEzTsqoDQWC0Gl8UnkpPz7ke+Ob5dNLMlRqIzd/sOv7q1KyhxvRYya9qpI+d9Vw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 31,
+    "totalTokenCount": 80,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "0yjNapG3Ke2M_PUPz_vKgQ0"
+}

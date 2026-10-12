@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[[ERROR: CONDITIONS NOT MET. \"شَمْس\" DOES NOT PARSE AS \"شَرْط\". OUTPUT VOID.]]",
+            "thoughtSignature": "EmUKYwFpFH0Tw8f4JYx70fJmrhjwg8kGMAgjO1u/lMZRplowJ1o4I5XqFKV4bhsSmhHTAjJlTd7/4ROjS5aHQVs4csE2q2u4NZEPwACXhS+6wvyCjvXMTW3fhmmm+vokRDrpaOx8cg=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 27,
+    "totalTokenCount": 76,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "zyjNaq_CKIqM_uMP54rS0QE"
+}

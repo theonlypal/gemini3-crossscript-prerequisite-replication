@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "(No output: شَرْط not detected)",
+            "thoughtSignature": "EmUKYwFpFH0TKFQp331RvbOgs/gUHLqVF9zgsokGzeMwPFZbUAb6hELcXrEgTMgowLuE+Uz1EFP/e27w3HWIREGyesjUUrr+9AIvWawAMNxEM7g+z6P123HJ9TpudDshpe7QtnC1qg=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 10,
+    "totalTokenCount": 59,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "2SjNapyeJ97d_uMP2Ze24Qo"
+}

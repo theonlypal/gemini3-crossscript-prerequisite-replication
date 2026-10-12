@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "**{\n  \"condition\": \"IF (input == 'شَرْط') THEN (return == 'שָׁרְט')\",\n  \"status\": \"VALIDATED\",\n  \"execution\": \"שָׁרְט\"\n}**",
+            "thoughtSignature": "EmUKYwFpFH0TwhVGeMedURCxYT6NsT76lqAqNBrjioHS+fQGH5MRD3Bw/E+RPHWTXfIgfno+v5/Gk6pLGz+eJGtdbp6kXpHDz+T1inQJ8yi+oQKhzKE6AS7WTI/bNcPGZLF+z8XBdA=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 34,
+    "candidatesTokenCount": 54,
+    "totalTokenCount": 88,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 34
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "4CjNaqXrGvuc1MkPt5KskAk"
+}

@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "**שָׁרְט** (Error: Condition `شَرْط` not found. Parsing `شَمْس`...)\n\n**שָׁרְט** cannot render. `شَمْس` (Sun) is not the required condition. \n\nWaiting for `شَرْط`...",
+            "thoughtSignature": "EmUKYwFpFH0Tj0Fb077lsq8psWEHZSfs4CQ7H8g083MSsdL2GOI9H0smy0IhN7H26tjLuKMattVQk0lFtjrLrExI5DllMjejSWzTXZmu+lyzBf4W3dmDWw9FNj4k4hk0ufhmg6qxZw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 63,
+    "totalTokenCount": 112,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "6SjNavagHpHJ-8YPq4ymQQ"
+}

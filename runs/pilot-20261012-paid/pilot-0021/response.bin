@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "שֶׁמֶשׁ",
+            "thoughtSignature": "EmUKYwFpFH0TIMAUR7ZA7Q9Zj+TOqynnN1aA+UKbc1BF/E9/UxVtJs/RcFh2zUXenWSx8D6f3Z8IWFGD22mNw8ttZq75d44s+VTmAdrMbVyzPRNmxh3iojlMf4AU+ORWEIh5ct4nZA=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 34,
+    "candidatesTokenCount": 6,
+    "totalTokenCount": 40,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 34
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "3CjNatb-FZ-wsOIPrJ7tmA8"
+}

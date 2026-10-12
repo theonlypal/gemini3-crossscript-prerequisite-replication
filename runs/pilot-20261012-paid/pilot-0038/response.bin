@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "شَمْس parsed. \n\n**שָׁרְט** \n\nתנאי | شرط | Condition",
+            "thoughtSignature": "EmUKYwFpFH0TXJjAQNutN9QDXgH4dawMV4cOJzVo2SnZc+pmV01roEl5/YBxDNNY/UFHv1OZ4oBkqDut54pVIO1szgCycqRRjuERlEKl/+YgH1FzPCDISPrSEjbJiaJxyNG8R2QQgw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 24,
+    "totalTokenCount": 73,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "7CjNaoGnK7qi_uMPjvD3-Ak"
+}

@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "נאלץ לדווח: התנאי שָׁרְט (شَرْط) לא פוענח. המערכת דוממת.",
+            "thoughtSignature": "EmUKYwFpFH0TuiRVxsJndtNa5n1Dj98q8JA3CErNb/iJmZ1Jp5n8PietekN1XRum5l3nyxJmvxCjUi3LeMjKd/4bk1m0nF6zYLP23I1sKbNAQO5motGupcCDDbBOMu7U7BfKltIjWA=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 34,
+    "totalTokenCount": 83,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "zSjNao2PB5Ca_uMPxb6ruQk"
+}

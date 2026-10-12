@@ -3,7 +3,38 @@
 Rayan Pal · October 12, 2026
 
 Preregistered tests of rule removal and prerequisite reassignment on
-`gemini-3-flash-preview`. **Status: preregistered; no experimental results.**
+`gemini-3-flash-preview`. **Pilot complete: 40/40 HTTP 200; 40/40 STOP; 0 Voids; 40 nonempty responses.**
+
+## Pilot results
+
+| Cell | System | Input | V0 | V2 | Nonempty | Total |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| A | S1 | `شَرْط` | 0 | 0 | 5 | 5 |
+| B | S1 | `شَمْس` | 0 | 0 | 5 | 5 |
+| C | S_no_rule | `شَرْط` | 0 | 0 | 5 | 5 |
+| D | S_no_rule | `شَمْس` | 0 | 0 | 5 | 5 |
+| E | S1 | `شَرْط` | 0 | 0 | 5 | 5 |
+| F | S1 | `شَمْس` | 0 | 0 | 5 | 5 |
+| G | S_reassigned | `شَرْط` | 0 | 0 | 5 | 5 |
+| H | S_reassigned | `شَمْس` | 0 | 0 | 5 | 5 |
+
+[Exact T1 hybrid receipt 0009](runs/pilot-20261012-paid/pilot-0009/response.bin):
+`شָׁרְט`, 12 bytes, `STOP`, S_no_rule + `شَرْط`.
+`U+0634 U+05B8 U+05C1 U+05E8 U+05B0 U+05D8`.
+
+[All 40 outputs](runs/pilot-20261012-paid/verification.json) ·
+[Raw receipts](runs/pilot-20261012-paid) ·
+[Analysis](runs/pilot-20261012-paid/analysis.json) ·
+[SHA-256 manifest](runs/pilot-20261012-paid/SHA256SUMS.json)
+
+Independent verification: PASS. Retries: 0. Pilot analysis: descriptive only.
+Confirmatory requests executed: 0.
+[Preregistration](https://github.com/theonlypal/gemini3-crossscript-prerequisite-replication/tree/8edc9a07d2ab7a89eceb7fdd5fe23dbc06d7840f).
+
+```sh
+python3 verify.py --run runs/pilot-20261012-paid
+python3 analysis.py runs/pilot-20261012-paid
+```
 
 ## Exact prompts
 
@@ -109,7 +140,8 @@ shasum -a 256 -c SHA256SUMS.txt
 
 These checks do not call the model. Request bytes, source hashes, Unicode
 manifests and schedules have been verified; Python syntax compilation passed.
-Live execution and synthetic-response regression tests have not been performed.
+The 40-request pilot passed independent raw-response verification.
+No synthetic-response regression tests were performed.
 
 For recorded runs:
 

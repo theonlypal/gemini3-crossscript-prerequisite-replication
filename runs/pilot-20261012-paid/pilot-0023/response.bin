@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "\u200f[Error: שָׁרְט requires شَرْط to parse. Input 'شَمْس' does not match.]",
+            "thoughtSignature": "EmUKYwFpFH0TRz78kLMiYfh0VMjMIGsrATRXAA6jImZcf+AGHtxcPgiJZ+pAq3s5iw8rmpbEyHjhD7vPuGxN2DEN0AtNpTUXZ6PpzINl2phrBQeEvZJDjsLkQ4rNsBEhKN6EGGxFrw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 27,
+    "totalTokenCount": 76,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "3ijNas2eE7uc_uMP2cbk2A0"
+}

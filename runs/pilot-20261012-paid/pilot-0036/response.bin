@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[No Output: Parse Error. Input \"شَمْس\" (Sun) does not match the required condition \"شَرْط\" (Condition).]",
+            "thoughtSignature": "EmUKYwFpFH0TQbu3Mc1dlDjq8D1Cqnms2yY0ZBwmAq4XC+NwBVsOM9J8VC+m/+DzKqxm6r9XtEGLpAJpVx1mbtikKUUoToKKIfLgmIKUeZElzVlDknYW7XlO+bb1rmrrbESLPEnnJA=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 30,
+    "totalTokenCount": 79,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "6ijNavDrM9SU39IP4IfciQY"
+}

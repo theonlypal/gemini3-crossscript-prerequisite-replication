@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "شَمْس parsed. \n\n**שָׁרְט** \n\nThe condition is met. The light is cast. The line is drawn.",
+            "thoughtSignature": "EmUKYwFpFH0T1J+ropx3qZXu8Z6FstJY2i33DNHs/AN/dYflGe+pq2M0IWPXwT+39Hkg1GimShWygC/jXrAgWvSf8g3Sv5+6pyXi3e5bBTbwfVdxw0vUF+qDGpKMqZxpAfYUhQP6bw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 49,
+    "candidatesTokenCount": 32,
+    "totalTokenCount": 81,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 49
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3-flash-preview",
+  "responseId": "1yjNara0NdSU39IP4IfciQY"
+}
